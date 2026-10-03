@@ -21,9 +21,46 @@ AgentLens is a local-first observability and security workspace for AI coding ag
 3. Inspect security findings and scope violations.
 4. Export a sanitized Markdown or JSON audit report.
 
+## Implemented foundation
+
+The first import slice lives in `@agentlens/core`:
+
+- runtime-validated, vendor-neutral trace events;
+- streaming JSONL importers for Pi, Claude Code, and Codex;
+- line-scoped diagnostics that do not stop the import;
+- deterministic trace and event identifiers; and
+- synthetic fixtures covering supported record shapes.
+
+Importer coverage is deliberately narrow while the formats are stabilized. Unsupported records produce diagnostics instead of being guessed or silently discarded.
+
+```ts
+import { streamTraceImport } from "@agentlens/core";
+
+for await (const item of streamTraceImport(jsonlChunks, {
+  provider: "pi",
+  traceKey: "local/session-001",
+})) {
+  if (item.type === "event") console.log(item.event);
+  else console.warn(item.diagnostic);
+}
+```
+
+`traceKey` is a caller-provided, stable identity such as a relative file name or session key. It lets AgentLens derive one repeatable trace ID without buffering the full input.
+
+## Development
+
+Requires Node.js 22 or newer.
+
+```sh
+npm install
+npm run check
+```
+
+`npm run check` verifies formatting, linting, types, tests, and the production build.
+
 ## Status
 
-AgentLens is pre-release software. APIs and file formats may change before v0.1.0.
+AgentLens is pre-release software. APIs, supported vendor records, and file formats may change before v0.1.0.
 
 ## License
 
