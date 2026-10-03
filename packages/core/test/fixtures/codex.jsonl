@@ -1,0 +1,5 @@
+{"type":"session_meta","timestamp":"2026-01-03T10:00:00Z","payload":{"id":"synthetic-codex-session"}}
+{"type":"event_msg","timestamp":"2026-01-03T10:00:01Z","payload":{"type":"user_message","id":"codex-msg-1","message":"Summarize the synthetic document."}}
+{"type":"response_item","timestamp":"2026-01-03T10:00:02Z","payload":{"type":"function_call","call_id":"codex-call-1","name":"read_document","arguments":"{\"path\":\"docs/example.md\"}"}}
+{"type":"response_item","timestamp":"2026-01-03T10:00:03Z","payload":{"type":"function_call_output","call_id":"codex-call-1","name":"read_document","output":"A synthetic document used for testing."}}
+{"type":"event_msg","timestamp":"2026-01-03T10:00:04Z","payload":{"type":"agent_message","id":"codex-msg-2","message":"The document contains synthetic test content."}}

@@ -1,0 +1,4 @@
+{"type":"message","id":"pi-msg-1","sessionId":"synthetic-pi-session","timestamp":"2026-01-01T10:00:00Z","role":"user","content":"List the files in the synthetic workspace."}
+{"type":"tool_call","id":"pi-call-1","sessionId":"synthetic-pi-session","timestamp":"2026-01-01T10:00:01Z","name":"list_files","arguments":{"path":"/example/workspace"}}
+{"type":"tool_result","toolCallId":"pi-call-1","sessionId":"synthetic-pi-session","timestamp":"2026-01-01T10:00:02Z","name":"list_files","result":{"files":["README.md"]},"isError":false}
+{"type":"message","id":"pi-msg-2","sessionId":"synthetic-pi-session","timestamp":"2026-01-01T10:00:03Z","role":"assistant","content":"The synthetic workspace contains one README file."}
