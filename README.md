@@ -29,7 +29,8 @@ The first import slice lives in `@agentlens/core`:
 - streaming JSONL importers for Pi, Claude Code, and Codex;
 - line-scoped diagnostics that do not stop the import;
 - deterministic trace and event identifiers;
-- recursive, deterministic credential redaction with safe findings; and
+- recursive, deterministic credential redaction with safe findings;
+- deterministic high-confidence shell-risk findings; and
 - synthetic fixtures covering supported record shapes.
 
 Importer coverage is deliberately narrow while the formats are stabilized. Unsupported records produce diagnostics instead of being guessed or silently discarded.
@@ -57,6 +58,16 @@ const { event: safeEvent, findings } = redactNormalizedEvent(event);
 ```
 
 The built-in rules target a deliberately small set of high-confidence API key, access key, token, and private-key patterns. Findings contain only a rule, JSON path, replacement label, and one-way fingerprint—never the matched value. PII and heuristic secret detection remain out of scope.
+
+### Deterministic shell-risk findings
+
+```ts
+import { analyzeShellRisks } from "@agentlens/core";
+
+const findings = analyzeShellRisks(event);
+```
+
+For recognized shell tool calls, AgentLens flags recursive forced deletion, Git force-pushes, reads of likely credential files, and downloaded scripts piped directly to a shell. Rules operate only on imported tool input, never execute commands, and intentionally favor high-confidence findings over broad heuristics.
 
 ## Development
 
