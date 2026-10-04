@@ -18,3 +18,13 @@ export type {
 export { collectImport, streamTraceImport } from "./importer.js";
 export type { ImportOptions } from "./importer.js";
 export { stableId } from "./ids.js";
+export {
+  RedactionFindingSchema,
+  RedactionResultSchema,
+  redactNormalizedEvent,
+} from "./redaction.js";
+export type {
+  RedactionFinding,
+  RedactionResult,
+  RedactionRuleId,
+} from "./redaction.js";

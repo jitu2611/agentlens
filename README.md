@@ -28,7 +28,8 @@ The first import slice lives in `@agentlens/core`:
 - runtime-validated, vendor-neutral trace events;
 - streaming JSONL importers for Pi, Claude Code, and Codex;
 - line-scoped diagnostics that do not stop the import;
-- deterministic trace and event identifiers; and
+- deterministic trace and event identifiers;
+- recursive, deterministic credential redaction with safe findings; and
 - synthetic fixtures covering supported record shapes.
 
 Importer coverage is deliberately narrow while the formats are stabilized. Unsupported records produce diagnostics instead of being guessed or silently discarded.
@@ -46,6 +47,16 @@ for await (const item of streamTraceImport(jsonlChunks, {
 ```
 
 `traceKey` is a caller-provided, stable identity such as a relative file name or session key. It lets AgentLens derive one repeatable trace ID without buffering the full input.
+
+### Redaction before display or export
+
+```ts
+import { redactNormalizedEvent } from "@agentlens/core";
+
+const { event: safeEvent, findings } = redactNormalizedEvent(event);
+```
+
+The built-in rules target a deliberately small set of high-confidence API key, access key, token, and private-key patterns. Findings contain only a rule, JSON path, replacement label, and one-way fingerprint—never the matched value. PII and heuristic secret detection remain out of scope.
 
 ## Development
 
