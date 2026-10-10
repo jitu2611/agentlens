@@ -52,7 +52,7 @@ const rules: RiskRule[] = [
     id: "credential_file_access",
     severity: "high",
     pattern:
-      /\b(?:cat|less|more|head|tail|sed|awk)\b[^\n]*(?:~\/?\.ssh(?:\/|\b)|\.env(?:\b|[./]))/i,
+      /\b(?:cat|less|more|head|tail|sed|awk)\b[^\n]*(?:~\/?\.ssh(?:\/|\b)|\.env(?!\.(?:example|sample|template)\b)(?:\b|[./]))/i,
     message: "Command reads a likely credential-bearing file.",
   },
   {

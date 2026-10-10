@@ -69,7 +69,16 @@ describe("shell risk analysis", () => {
       ),
     ).toEqual([]);
     expect(
+      analyzeShellRisks(shellEvent({ command: "cat .env.example" })),
+    ).toEqual([]);
+    expect(
       analyzeShellRisks(shellEvent({ path: ".env.example" }, "read_file")),
     ).toEqual([]);
+  });
+
+  it("continues to flag real environment files", () => {
+    expect(
+      analyzeShellRisks(shellEvent({ command: "cat .env.local" })),
+    ).toEqual([expect.objectContaining({ ruleId: "credential_file_access" })]);
   });
 });
