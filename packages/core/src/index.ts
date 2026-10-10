@@ -18,6 +18,8 @@ export type {
 export { collectImport, streamTraceImport } from "./importer.js";
 export type { ImportOptions } from "./importer.js";
 export { stableId } from "./ids.js";
+export { RiskFindingSchema, analyzeShellRisks } from "./risk.js";
+export type { RiskFinding, RiskRuleId } from "./risk.js";
 export {
   RedactionFindingSchema,
   RedactionResultSchema,
